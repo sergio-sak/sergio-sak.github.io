@@ -1,0 +1,114 @@
+:root { 
+    --main-color: #5D3FD3;
+    --text-color: #FFF;
+    --background-color: #131316;
+    --link-color: #337ab7;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add_padding{
+    padding: 10px;
+}
+
+.add_border {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    /* box-shadow: 0 2px 5px rgba(164, 21, 21, 0.1); */
+}
+
+.center_text {
+    text-align: center;
+}
+
+.bigger_text {
+    font-size: 1.2em;
+}
+
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 10;
+    padding: 10;
+    line-height: 1.6;
+}
+
+section {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    min-height: 15vh;
+    }
+
+/* Nav*/
+nav {
+    background: var(--main-color);
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+h1, h2, h3{
+    padding: 10px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+h4 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+}
+
+figcaption {
+    font-style: italic;
+    text-align: center;
+}
+
+@media (max-width: 768px) { /* To epsaxa afto, nomizw oti einai kati gia to responsiveness */
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+    .content-section {
+        padding: 20px 5%;
+    }
+}
+
+/* Animations TO EPSAJA, oxi olo alla to app.js to eftiaja me to help enos site kai tou copilot */
+.hidden {
+    opacity: 0;
+    transition: all 2s;
+}
+
+.show {
+    opacity: 1;
+}

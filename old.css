@@ -1,0 +1,99 @@
+:root { 
+    --main-color: #5D3FD3;
+    --text-color: #333;
+    --background-color: #FFF;
+    --link-color: #337ab7;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add_padding{
+    padding: 10px;
+}
+
+.add_border {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.center_text {
+    text-align: center;
+}
+
+.bigger_text {
+    font-size: 1.2em;
+}
+
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 10;
+    padding: 10;
+    line-height: 1.6;
+}
+
+/* Nav*/
+nav {
+    background: var(--main-color);
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+}
+
+table, td {
+    border: 1px solid #ddd;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+h1, h2, h3{
+    padding: 10px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+h4 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+figcaption {
+    font-style: italic;
+    text-align: center;
+}
+
+@media (max-width: 768px) { /* To epsaxa afto, nomizw oti einai kati gia to responsiveness */
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+    .content-section {
+        padding: 20px 5%;
+    }
+}
