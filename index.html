@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MathSolver Pro (IA Prototype)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.20/dist/katex.min.css"> <!--Parses katex-->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.20/dist/katex.min.js"></script>
+
+</head>
+<body>
+<header>MathSolver Pro — IA Web Prototype</header>
+
+<div class="wrap">  <!-- Two Column Style -->
+  <!-- Left Column: Main -->
+  <div class="card">
+    <div class="tabs"> <!-- Opens tabs for the upper part -->
+      <div class="tab active" id="tab-integral">Definite Integral</div>
+      <div class="tab" id="tab-ode">First-Order ODE (IVP)</div>
+      <div style="flex:1"></div>
+      <button class="small ghost" id="btn-settings">Settings</button>
+    </div>
+
+    <!-- Integral Panel -->
+    <section id="panel-integral"> <!-- Also sets the id for js-->
+      <label>f(x)</label>
+      <textarea id="int-fx" class="focus" placeholder="Build using keyboard below"></textarea>
+
+      <div id="int-preview" class="card" style="background:#0e1122;margin-top:8px;">
+      <div class="muted" style="font-size:12px;margin-bottom:4px;">Preview</div>
+      <div id="int-preview-math"></div>
+      </div>
+
+
+      <div class="row3">
+        <div>
+          <label>a (Lower bound)</label> <!-- Integral Limits-->
+          <input id="int-a" type="text" value="0" placeholder="number or pi/2" step="any">
+        </div>
+        <div>
+          <label>b (Upper bound)</label>
+            <input id="int-b" type="text" value="3.1415926535" placeholder="number or pi/e" step="any">        </div>
+        <div>
+          <label>n steps (Simpson needs the number to be even)</label>
+          <input id="int-n" type="number" value="200" min="2" step="1">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Tolerance</label>
+          <input id="int-tol" type="number" value="1e-5" step="any">
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="solve-integral">Solve Integral</button>
+        </div>
+      </div>
+
+      <div class="flex" style="margin-top:8px;">
+        <button id="verify-integral" class="small">Verify with WolframAlpha</button>
+        <button id="practice-integral" class="small">Generate Similar Practice</button>
+        <span class="muted" id="int-status"></span>
+      </div>
+    </section>
+
+    <!-- ODE Panel -->
+    <section id="panel-ode" style="display:none;">
+      <label>F(x, y) for y' = F(x,y)</label>
+      <textarea id="ode-fxy" placeholder="Example: y - x^2 + 1"></textarea>
+
+      <div class="row3">
+        <div>
+          <label>x0</label>
+          <input id="ode-x0" type="number" value="0" step="any">
+        </div>
+        <div>
+          <label>y0</label>
+          <input id="ode-y0" type="number" value="0.5" step="any">
+        </div>
+        <div>
+          <label>x_end</label>
+          <input id="ode-xend" type="number" value="2" step="any">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>step h</label>
+          <input id="ode-h" type="number" value="0.1" step="any" min="1e-6">
+        </div>
+        <div>
+          <label>Tolerance</label>
+          <input id="ode-tol" type="number" value="1e-4" step="any">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>&nbsp;</label>
+          <button id="solve-ode">Solve ODE</button>
+        </div>
+        <div class="flex" style="align-items:end;">
+          <button id="verify-ode" class="small">Verify with WolframAlpha</button>
+          <button id="practice-ode" class="small">Generate Similar Practice</button>
+        </div>
+      </div>
+      <span class="muted" id="ode-status"></span>
+    </section>
+
+    <!-- Keyboard -->
+    <div style="margin-top:10px;">
+      <div class="muted" style="font-size:12px;">Math Keyboard (click to insert)</div>
+      <div class="kbd" id="keyboard"></div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid #262c49;margin:12px 0;">
+
+    <div>
+      <div class="muted" style="font-size:12px;">Output</div>
+      <div id="output" class="results"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: History -->
+  <div class="card">
+    <div class="flex">
+      <div style="font-weight:800;">History</div>
+      <button class="small ghost" id="clear-history">Clear</button>
+    </div>
+    <div id="history"></div>
+  </div>
+</div>
+
+<!-- Settings modal (simple inline) Settings for setting API keys and so on--> 
+<div id="settings-modal" class="card" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(520px,92vw);z-index:99;">
+  <div class="flex">
+    <div style="font-weight:800;">API Settings</div>
+    <div style="flex:1"></div>
+    <button class="small ghost" id="close-settings">Close</button>
+  </div>
+  <label>OpenAI API Key (Responses API)</label>
+  <input id="openai-key" type="password" placeholder="sk-... (stored locally)">
+  <label>OpenAI Model</label>
+  <input id="openai-model" type="text" value="gpt-4.1-mini">
+  <label>WolframAlpha AppID</label>
+  <input id="wa-appid" type="password" placeholder="XXXXXX-YYYYYYY">
+  <div class="muted" style="font-size:12px;margin-top:8px;">
+    Keys are stored in localStorage on this device only. For real deployment, use a backend proxy.
+  </div>
+  <button style="margin-top:10px;" id="save-settings">Save Settings</button>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
+

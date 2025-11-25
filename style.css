@@ -1,0 +1,43 @@
+:root {
+      --bg: #0f1221;
+      --card: #171a2b;
+      --muted: #9aa3b2;
+      --text: #e7ecf4;
+      --accent: #8ab4ff;
+      --danger: #ff7a7a;
+      --ok: #7dffb2;
+    }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto;
+      background: var(--bg); color: var(--text); }
+    header { padding: 16px 20px; font-size: 20px; font-weight: 700; }
+    .wrap { display: grid; grid-template-columns: 2.2fr 1fr; gap: 14px; padding: 0 14px 14px; }
+    .card { background: var(--card); border-radius: 14px; padding: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+    .tabs { display:flex; gap:8px; margin-bottom:10px; }
+    .tab { padding:8px 12px; border-radius: 10px; background:#111425; cursor:pointer; color:var(--muted); font-weight:600; }
+    .tab.active { background:#232844; color:var(--text); outline: 1px solid #2f365a;}
+    label { display:block; font-size:12px; color:var(--muted); margin: 8px 0 4px; }
+    input, textarea, select {
+      width: 100%; box-sizing: border-box; padding: 8px 10px; border-radius: 8px;
+      border: 1px solid #2b3152; background:#0e1122; color:var(--text);
+      font-family: inherit; outline:none;
+    }
+    textarea { min-height: 54px; resize: vertical; }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .row3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    button {
+      background:#232844; color:var(--text); border:1px solid #2f365a;
+      padding: 9px 12px; border-radius: 10px; cursor: pointer; font-weight:700;
+    }
+    button:hover { filter: brightness(1.08); }
+    button.ghost { background: transparent; }
+    button.small { padding: 6px 8px; font-size: 12px; }
+    .kbd { display:grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 8px; }
+    .kbd button { font-weight:600; padding:8px 0; border-radius:8px; }
+    .focus { outline: 1px solid var(--accent); }
+    .results { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
+    .muted { color: var(--muted); }
+    .ok { color: var(--ok); font-weight:700; }
+    .danger { color: var(--danger); font-weight:700; }
+    .history-item { border-top: 1px solid #262c49; padding-top: 8px; margin-top: 8px; }
+    .pill { display:inline-block; padding:2px 7px;border-radius:999px;background:#0e1122;border:1px solid #2b3152;font-size:11px;color:var(--muted); }
+    .flex { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
